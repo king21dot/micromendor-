@@ -1,0 +1,18 @@
+[
+  {
+    "timestamp": "2025-08-27T12:00:07.613329",
+    "mood_text": "angry ",
+    "stress_level": 5,
+    "sentiment_polarity": -0.5,
+    "sentiment_subjectivity": 1.0,
+    "sentiment_label": "Negative"
+  },
+  {
+    "timestamp": "2025-08-27T12:01:49.029746",
+    "mood_text": "happy",
+    "stress_level": 7,
+    "sentiment_polarity": 0.8,
+    "sentiment_subjectivity": 1.0,
+    "sentiment_label": "Positive"
+  }
+]
