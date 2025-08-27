@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MicroMood - Youth Mental Health Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧠 MicroMood</h1>
+            <h2>Your Personal Mental Health & Career Development Companion</h2>
+        </header>
+
+        <nav class="nav-tabs">
+            <button class="tab-btn active" onclick="showTab('mood-tracker')">Track My Mood</button>
+            <button class="tab-btn" onclick="showTab('progress')">View My Progress</button>
+            <button class="tab-btn" onclick="showTab('about')">About MicroMood</button>
+        </nav>
+
+        <!-- Mood Tracker Tab -->
+        <div id="mood-tracker" class="tab-content active">
+            <h3>How are you feeling today?</h3>
+            
+            <!-- Character Selection -->
+            <div class="character-section">
+                <h4>Choose Your Wellness Companion:</h4>
+                <div class="character-grid">
+                    <div class="character-card active" data-character="buddy">
+                        <div class="character-avatar buddy-avatar">🐶</div>
+                        <span>Buddy the Dog</span>
+                    </div>
+                    <div class="character-card" data-character="sage">
+                        <div class="character-avatar sage-avatar">🦉</div>
+                        <span>Sage the Owl</span>
+                    </div>
+                    <div class="character-card" data-character="sunny">
+                        <div class="character-avatar sunny-avatar">🌻</div>
+                        <span>Sunny the Flower</span>
+                    </div>
+                    <div class="character-card" data-character="zen">
+                        <div class="character-avatar zen-avatar">🐱</div>
+                        <span>Zen the Cat</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Character Display Area -->
+            <div class="character-display">
+                <div id="selected-character" class="main-character buddy-avatar">🐶</div>
+                <div class="character-speech-bubble">
+                    <p id="character-message">Hi there! I'm here to help you track your mood and find wellness activities. How are you feeling today?</p>
+                </div>
+            </div>
+            
+            <form id="mood-form" class="mood-form">
+                <div class="form-group">
+                    <label for="mood-text">Describe your mood:</label>
+                    <textarea id="mood-text" placeholder="Tell me how you're feeling today... What's on your mind?" rows="4"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="stress-level">Stress Level (0-10):</label>
+                    <input type="range" id="stress-level" min="0" max="10" value="5">
+                    <span id="stress-value">5</span>
+                </div>
+                
+                <button type="submit">Analyze My Mood</button>
+            </form>
+
+            <div id="mood-results" class="results" style="display: none;">
+                <div class="metrics">
+                    <div class="metric">
+                        <h4>Sentiment</h4>
+                        <span id="sentiment-label">-</span>
+                        <small id="sentiment-score">-</small>
+                    </div>
+                    <div class="metric">
+                        <h4>Stress Level</h4>
+                        <span id="stress-display">-</span>
+                    </div>
+                </div>
+
+                <div class="microtasks">
+                    <h4>💡 Recommended Microtasks for You</h4>
+                    <p>Here are some personalized activities to help improve your wellness:</p>
+                    <ul id="task-list"></ul>
+                    <div class="tip">
+                        💡 <strong>Tip:</strong> These microtasks are designed to take just 2-10 minutes. Pick one that feels right for you today!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Tab -->
+        <div id="progress" class="tab-content">
+            <h3>📊 Your Mood Journey</h3>
+            
+            <div id="stats" class="stats">
+                <div class="stat">
+                    <h4>Total Entries</h4>
+                    <span id="total-entries">0</span>
+                </div>
+                <div class="stat">
+                    <h4>Avg Sentiment</h4>
+                    <span id="avg-sentiment">0.00</span>
+                </div>
+                <div class="stat">
+                    <h4>Avg Stress</h4>
+                    <span id="avg-stress">0.0</span>
+                </div>
+                <div class="stat">
+                    <h4>Recent Trend</h4>
+                    <span id="recent-trend">📊 Starting</span>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="mood-chart"></canvas>
+            </div>
+
+            <div class="recent-entries">
+                <h4>Recent Mood Entries</h4>
+                <div id="entries-list"></div>
+            </div>
+
+            <div class="data-management">
+                <h4>Data Management</h4>
+                <button id="clear-data-btn" class="secondary-btn">Clear All Data</button>
+                <div id="clear-confirm" style="display: none;">
+                    <label>
+                        <input type="checkbox" id="confirm-clear">
+                        I understand this will delete all my mood data
+                    </label>
+                    <button id="confirm-clear-btn">Confirm Clear</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Tab -->
+        <div id="about" class="tab-content">
+            <h3>About MicroMood</h3>
+            
+            <p><strong>MicroMood</strong> is designed specifically for young adults to support both mental health and career development through daily mood tracking and personalized microtasks.</p>
+            
+            <div class="features">
+                <h4>🎯 Key Features:</h4>
+                <ul>
+                    <li><strong>Mood Tracking:</strong> Record your daily feelings and stress levels</li>
+                    <li><strong>Sentiment Analysis:</strong> AI-powered analysis of your emotional state</li>
+                    <li><strong>Personalized Microtasks:</strong> Get tailored suggestions for wellness and career growth</li>
+                    <li><strong>Progress Visualization:</strong> Track your mood trends over time with interactive charts</li>
+                    <li><strong>Youth-Focused:</strong> Activities designed for students and early-career professionals</li>
+                </ul>
+            </div>
+
+            <div class="benefits">
+                <h4>🌟 Why MicroMood Helps:</h4>
+                
+                <h5>Mental Health Benefits:</h5>
+                <ul>
+                    <li>Increases self-awareness through daily reflection</li>
+                    <li>Provides immediate coping strategies during stressful moments</li>
+                    <li>Helps identify patterns in mood and stress triggers</li>
+                    <li>Encourages regular mental health check-ins</li>
+                </ul>
+
+                <h5>Career Development Benefits:</h5>
+                <ul>
+                    <li>Suggests career-building activities like resume updates and skill practice</li>
+                    <li>Promotes consistent personal and professional growth</li>
+                    <li>Helps build resilience and stress management skills for the workplace</li>
+                    <li>Encourages networking and continuous learning habits</li>
+                </ul>
+            </div>
+
+            <div class="privacy">
+                <h4>🔒 Privacy & Data:</h4>
+                <ul>
+                    <li>All data is stored locally in your browser</li>
+                    <li>No personal information is shared with external services</li>
+                    <li>You have full control over your data and can clear it anytime</li>
+                </ul>
+            </div>
+
+            <div class="disclaimer">
+                <p><strong>Remember:</strong> This app is a wellness tool and not a replacement for professional mental health care. If you're experiencing persistent mental health concerns, please reach out to a healthcare provider or counselor.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
